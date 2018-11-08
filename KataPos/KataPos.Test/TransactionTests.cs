@@ -47,5 +47,14 @@ namespace KataPos.Test
             }
             Assert.AreEqual(5m, transaction.TotalValue);
         }
+
+        [TestMethod]
+        public void ScanningAndUnscanningAnItemShouldHaveZeroValue()
+        {
+            var transaction = new Transaction{Catalog = _testCatalog};
+            transaction.Scan("steak");
+            transaction.UnScan("steak");
+            Assert.AreEqual(0m, transaction.TotalValue);
+        }
     }
 }

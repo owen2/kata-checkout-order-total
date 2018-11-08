@@ -18,5 +18,10 @@ namespace KataPos
             else
                 throw new Exception($"No item matching barcode ${barcode} was found.");
         }
+
+        public void UnScan(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
