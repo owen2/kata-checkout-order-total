@@ -2,6 +2,6 @@
 {
     public class Item
     {
-        public decimal Value { get; set; }
+        public decimal EachesPrice { get; set; }
     }
 }
