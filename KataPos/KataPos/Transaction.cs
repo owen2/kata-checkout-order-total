@@ -19,9 +19,12 @@ namespace KataPos
                 throw new Exception($"No item matching barcode ${barcode} was found.");
         }
 
-        public void UnScan(string v)
+        public void UnScan(string barcode)
         {
-            throw new NotImplementedException();
+            if (!Catalog.ContainsKey(barcode)) return;
+
+            var item = Catalog[barcode];
+            Items.Remove(item);
         }
     }
 }
