@@ -1,13 +1,16 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using KataPos;
 
 namespace KataPos.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class TransactionTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void EmptyTransactionHasNoValue()
         {
+            var transaction = new Transaction();
+            Assert.AreEqual(0, transaction.TotalValue);
         }
     }
 }

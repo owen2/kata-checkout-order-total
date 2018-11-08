@@ -2,7 +2,8 @@
 
 namespace KataPos
 {
-    public class Class1
+    public class Transaction
     {
+        public int TotalValue { get; set; }
     }
 }
