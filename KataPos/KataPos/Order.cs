@@ -8,13 +8,13 @@ namespace KataPos
     {
         public IList<Item> Items { get; } = new List<Item>();
 
-        public decimal PreTaxTotal => Items.Sum(i => i.EachesPrice);
-        public Dictionary<string, Item> Catalog { get; set; } = new Dictionary<string, Item>();
+        public decimal PreTaxTotal => Items.Sum(i => i.Value);
+        public Dictionary<string, CatalogEntry> Catalog { get; set; } = new Dictionary<string, CatalogEntry>();
 
         public void Scan(string barcode)
         {
             if (Catalog.ContainsKey(barcode))
-                Items.Add(Catalog[barcode]);
+                Items.Add(new IndividualItem(Catalog[barcode]));
             else
                 throw new Exception($"No item matching barcode ${barcode} was found.");
         }
@@ -23,7 +23,7 @@ namespace KataPos
         {
             if (!Catalog.ContainsKey(barcode)) return;
 
-            var item = Catalog[barcode];
+            var item = Items.LastOrDefault(i => i.Barcode == barcode);
             Items.Remove(item);
         }
 

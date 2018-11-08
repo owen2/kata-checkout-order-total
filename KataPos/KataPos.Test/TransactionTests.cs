@@ -7,11 +7,11 @@ namespace KataPos.Test
     [TestClass]
     public class TransactionTests
     {
-        readonly Dictionary<string, Item> _testCatalog = new Dictionary<string, Item>
+        readonly Dictionary<string, CatalogEntry> _testCatalog = new Dictionary<string, CatalogEntry>
         {
-            ["dog-food"] = new Item { EachesPrice = 20m },
-            ["pear"] = new Item { EachesPrice = 1.25m },
-            ["steak"] = new Item { EachesPrice = 10m },
+            ["dog-food"] = new CatalogEntry { Barcode = "dog-food", Price = 20m },
+            ["pear"] = new CatalogEntry { Barcode = "pear", Price = 1.25m },
+            ["steak"] = new CatalogEntry { Barcode = "steak", Price = 10m },
         };
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace KataPos.Test
         [TestMethod]
         public void ScanningAndUnscanningAnItemShouldHaveZeroValue()
         {
-            var transaction = new Order{Catalog = _testCatalog};
+            var transaction = new Order { Catalog = _testCatalog };
             transaction.Scan("steak");
             transaction.UnScan("steak");
             Assert.AreEqual(0m, transaction.PreTaxTotal);
