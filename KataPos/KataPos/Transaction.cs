@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KataPos
 {
@@ -7,7 +8,7 @@ namespace KataPos
     {
         public IList<Item> Items { get; } = new List<Item>();
 
-        public int TotalValue { get; set; }
+        public decimal TotalValue => Items.Sum(i => i.Value);
         public Dictionary<string, Item> Catalog { get; set; } = new Dictionary<string, Item>();
 
         public void Scan(string barcode)
