@@ -62,7 +62,7 @@ namespace KataPos.Test
         {
             var transaction = new Order { Catalog = _testCatalog };
             transaction.Scan("steak", .5m);
-            Assert.AreEqual(.5m, transaction.PreTaxTotal);
+            Assert.AreEqual(5m, transaction.PreTaxTotal);
         }
     }
 }

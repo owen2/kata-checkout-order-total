@@ -29,7 +29,8 @@ namespace KataPos
 
         public void Scan(string barcode, decimal weight)
         {
-            Scan(barcode);
+            if (Catalog.ContainsKey(barcode))
+                Items.Add(new ItemByWeight(Catalog[barcode], weight));
         }
     }
 }

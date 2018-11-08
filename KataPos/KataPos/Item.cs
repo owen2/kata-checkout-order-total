@@ -20,6 +20,13 @@
     
     public class ItemByWeight : Item
     {
+        public ItemByWeight(CatalogEntry catalogEntry, decimal weight)
+        {
+            PerUnitPrice = catalogEntry.Price;
+            Barcode = catalogEntry.Barcode;
+            Weight = weight;
+        }
+
         public decimal Weight { get; set; }
         public decimal PerUnitPrice { get; set; }
         public override decimal Value { get => Weight*PerUnitPrice; }
