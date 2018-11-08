@@ -26,5 +26,10 @@ namespace KataPos
             var item = Catalog[barcode];
             Items.Remove(item);
         }
+
+        public void Scan(string barcode, decimal weight)
+        {
+            Scan(barcode);
+        }
     }
 }

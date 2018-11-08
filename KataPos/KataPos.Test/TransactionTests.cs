@@ -11,7 +11,7 @@ namespace KataPos.Test
         {
             ["dog-food"] = new Item { EachesPrice = 20m },
             ["pear"] = new Item { EachesPrice = 1.25m },
-            ["steak"] = new Item { EachesPrice = 10.99m },
+            ["steak"] = new Item { EachesPrice = 10m },
         };
 
         [TestMethod]
@@ -55,6 +55,14 @@ namespace KataPos.Test
             transaction.Scan("steak");
             transaction.UnScan("steak");
             Assert.AreEqual(0m, transaction.PreTaxTotal);
+        }
+
+        [TestMethod]
+        public void BuyingSteakUsesWeightToCalculateValue()
+        {
+            var transaction = new Order { Catalog = _testCatalog };
+            transaction.Scan("steak", .5m);
+            Assert.AreEqual(.5m, transaction.PreTaxTotal);
         }
     }
 }
