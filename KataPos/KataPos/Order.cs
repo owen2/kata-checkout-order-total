@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace KataPos
 {
-    public class Transaction
+    public class Order
     {
         public IList<Item> Items { get; } = new List<Item>();
 
-        public decimal TotalValue => Items.Sum(i => i.Value);
+        public decimal PreTaxTotal => Items.Sum(i => i.EachesPrice);
         public Dictionary<string, Item> Catalog { get; set; } = new Dictionary<string, Item>();
 
         public void Scan(string barcode)
