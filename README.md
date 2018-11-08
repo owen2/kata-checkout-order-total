@@ -1,5 +1,17 @@
 # Checkout Order Total Kata
 
+## To build and test:
+
+You'll need the .net core runtime/sdk installed.
+
+In the KataPos folder:
+`dotnet build` to build
+
+In the KataPos.Test folder:
+`dotnet test` to test
+
+## Introduction
+
 You have been contracted to write part of a grocery point-of-sale system. Your job is to implement the business logic to calculate the pre-tax total price as items are scanned or entered at checkout.
 
 Many items are sold at an "eaches" price. For example, a can of soup sells for $1.89 each.
