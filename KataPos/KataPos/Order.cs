@@ -10,6 +10,7 @@ namespace KataPos
 
         public decimal PreTaxTotal => Items.Sum(i => i.Value);
         public Dictionary<string, CatalogEntry> Catalog { get; set; } = new Dictionary<string, CatalogEntry>();
+        public IList<IPromotion> Promotions { get; set; } = new List<IPromotion>();
 
         public void Scan(string barcode)
         {
