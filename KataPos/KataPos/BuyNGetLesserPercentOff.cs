@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace KataPos
@@ -18,7 +19,12 @@ namespace KataPos
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            throw new NotImplementedException();
+            var applicableItems = items.OfType<ItemByWeight>().Where(item => item.Barcode == Barcode).OrderBy(item => item.Value).ToList();
+
+            var aboveTriggerCount = applicableItems.Count(item => item.Weight >= TriggerWeight);
+            var totalCount = applicableItems.Count();
+
+            return -applicableItems.Take(Math.Min(totalCount / 2, aboveTriggerCount)).Sum(item => item.Value);
         }
     }
 }
