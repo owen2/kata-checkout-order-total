@@ -23,10 +23,11 @@ namespace KataPos
                 return 0m;
 
             var price = applicableItems.First().EachesPrice;
-            var discountedItems = applicableItems.Count() / (TriggerQuantity + 1);
+            var count = applicableItems.Count();
             if (Limit.HasValue)
-                discountedItems = Math.Min(discountedItems, Limit.Value);
+                count = Math.Min(count, Limit.Value);
 
+            var discountedItems = count / (TriggerQuantity + 1);
             return -discountedItems * price * PercentOff;
         }
     }

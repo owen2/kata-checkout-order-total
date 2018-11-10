@@ -71,10 +71,10 @@ namespace KataPos.Test
         }
 
         [TestMethod]
-        public void BuyOneDogFoodGetOneDogFoodFreeLimitOne()
+        public void BuyOneDogFoodGetOneDogFoodFreeLimitTwo()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m, Limit = 1 });
+            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m, Limit = 2 });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -82,6 +82,36 @@ namespace KataPos.Test
             order.Scan("dog-food");
 
             Assert.AreEqual(60m, order.PreTaxTotal);
+        }
+
+        [TestMethod]
+        public void BuyOneDogFoodGetOneDogFoodFreeNoLimit()
+        {
+            var order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m});
+
+            order.Scan("dog-food");
+            order.Scan("dog-food");
+            order.Scan("dog-food");
+            order.Scan("dog-food");
+
+            Assert.AreEqual(40m, order.PreTaxTotal);
+        }
+
+        [TestMethod]
+        public void UnscanDoesntGiveAwayFreeDogfood()
+        {
+            var order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
+
+            order.Scan("dog-food");
+            order.Scan("dog-food");
+
+            Assert.AreEqual(20m, order.PreTaxTotal);
+
+            order.UnScan("dog-food");
+
+            Assert.AreEqual(20m, order.PreTaxTotal);
         }
     }
 }

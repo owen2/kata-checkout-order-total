@@ -34,5 +34,15 @@ namespace KataPos.Test
             order.Scan("pear");
             Assert.AreEqual(19m, order.PreTaxTotal);
         }
+
+        [TestMethod]
+        public void UnscanDoesntAllowResidualMarkdowns()
+        {
+            var order = new Order{Catalog = TestCatalog.Catalog};
+            order.Promotions.Add(new Markdown("pear", .25m));
+            order.Scan("pear");
+            order.UnScan("pear");
+            Assert.AreEqual(0m, order.PreTaxTotal);
+        }
     }
 }
