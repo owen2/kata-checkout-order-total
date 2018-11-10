@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KataPos
 {
-    public interface IPromotion
+    public interface ISpecial
     {
         decimal CalculateDiscount(IEnumerable<Item> items);
     }

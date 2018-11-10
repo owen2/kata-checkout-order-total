@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KataPos
 {
-    public class Markdown : IPromotion
+    public class Markdown : ISpecial
     {
         public string Barcode { get; set; }
         public decimal Amount { get; set; }
