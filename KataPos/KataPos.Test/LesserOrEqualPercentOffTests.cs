@@ -10,7 +10,7 @@ namespace KataPos.Test
         public void BuyOneSteakGetTheSmallerOneFree()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            //order.Promotions.Add(new BuyNGetLesserPercentOff("steak",2, ))
+            //order.Promotions.Add(new BuyNGetLesserPercentOff("steak", 2, 1m));
         }
     }
 }
