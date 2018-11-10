@@ -18,7 +18,7 @@ namespace KataPos
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
             var discount = 0m;
-            discount += Amount * items.OfType<IndividualItem>().Count(item => item.Barcode == Barcode);
+            discount += -Amount * items.OfType<IndividualItem>().Count(item => item.Barcode == Barcode);
             discount += items.OfType<ItemByWeight>().Where(item => item.Barcode == Barcode).Sum(item => item.Weight);
             return discount;
         }
