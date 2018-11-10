@@ -17,7 +17,7 @@
         public override decimal Value { get => EachesPrice; }
         public decimal EachesPrice { get; set; }
     }
-    
+
     public class ItemByWeight : Item
     {
         public ItemByWeight(CatalogEntry catalogEntry, decimal weight)
@@ -29,6 +29,6 @@
 
         public decimal Weight { get; set; }
         public decimal PerUnitPrice { get; set; }
-        public override decimal Value { get => Weight*PerUnitPrice; }
+        public override decimal Value { get => Weight * PerUnitPrice; }
     }
 }

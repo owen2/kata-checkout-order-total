@@ -1,18 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace KataPos
 {
-    public class BuyNGetLesserPercentOff
+    public class BuyNGetLesserPercentOff : ISpecial
     {
-        public string Barcode
+        public BuyNGetLesserPercentOff(string barcode, decimal triggerWeight, decimal percentOff)
         {
-            get;
-            set;
+            Barcode = barcode;
+            TriggerWeight = triggerWeight;
+            PercentOff = percentOff;
         }
 
-        public decimal   TriggerWeight
+        public string Barcode { get; set; }
+        public decimal TriggerWeight { get; set; }
+        public decimal PercentOff { get; set; }
+
+        public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            get;
-            set;
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace KataPos
     {
         public IList<Item> Items { get; } = new List<Item>();
 
-        public decimal PreTaxTotal => Items.Sum(i => i.Value) + Promotions.Sum(promo=> promo.CalculateDiscount(Items));
+        public decimal PreTaxTotal => Items.Sum(i => i.Value) + Promotions.Sum(promo => promo.CalculateDiscount(Items));
         public Dictionary<string, CatalogEntry> Catalog { get; set; } = new Dictionary<string, CatalogEntry>();
         public IList<ISpecial> Promotions { get; set; } = new List<ISpecial>();
 

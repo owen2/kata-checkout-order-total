@@ -31,7 +31,7 @@ namespace KataPos
 
             var extras = count % TriggerQuantity;
 
-            return (-eachesPrice * bundles * TriggerQuantity) + (bundles * BundlePrice); //+ (extras * eachesPrice);
+            return (-eachesPrice * bundles * TriggerQuantity) + (bundles * BundlePrice); 
         }
     }
 }
