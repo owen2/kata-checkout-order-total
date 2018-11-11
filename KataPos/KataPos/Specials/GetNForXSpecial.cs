@@ -22,8 +22,6 @@ namespace KataPos
 
             var bundles = count / TriggerQuantity;
 
-            var extras = count % TriggerQuantity;
-
             return (-eachesPrice * bundles * TriggerQuantity) + (bundles * BundlePrice); 
         }
     }
