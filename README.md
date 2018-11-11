@@ -2,12 +2,12 @@
 
 ## To build and test:
 
-You'll need the .net core runtime/sdk installed.
+You'll need the .net core runtime/sdk installed. The one that comes with the latest Visual Studio or Visual Studio for Mac is okay.
 
 In the KataPos folder:
 `dotnet build` to build
 
-In the KataPos.Test folder:
+In the KataPos/KataPos.Test folder:
 `dotnet test` to test
 
 ## Introduction
