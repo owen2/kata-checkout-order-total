@@ -10,7 +10,7 @@ namespace KataPos.Test
         public void BuyOneSteakGetTheSmallerOneFree()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1.9m, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1.9m, PercentOff = 1m, TriggerQuantity = 1 });
 
             order.Scan("steak", 2m);
             order.Scan("steak", 1m);
@@ -22,7 +22,7 @@ namespace KataPos.Test
         public void BuyOneSteakGetEqualOneFree()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 2m, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 2m, PercentOff = 1m, TriggerQuantity = 1 });
 
             order.Scan("steak", 2m);
             order.Scan("steak", 2m);
@@ -34,7 +34,7 @@ namespace KataPos.Test
         public void BuyOneSteakNoFreeSteak()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 2m, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 2m, PercentOff = 1m, TriggerQuantity=1 });
 
             order.Scan("steak", 2m);
 
@@ -45,7 +45,7 @@ namespace KataPos.Test
         public void BuyTwoGetTwoSteaks()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = 1m, TriggerQuantity =2, DiscountedQuantity =2 });
 
             order.Scan("steak", 1.3m);
             order.Scan("steak", 1.2m);
@@ -55,11 +55,25 @@ namespace KataPos.Test
             Assert.AreEqual(13m + 12m, order.PreTaxTotal);
         }
 
-         [TestMethod]
+        [TestMethod]
+        public void BuyTwoGetTwoSteaksByStackingBuyOneGetOne()
+        {
+            var order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = 1m, TriggerQuantity = 1, DiscountedQuantity = 1 });
+
+            order.Scan("steak", 1.3m);
+            order.Scan("steak", 1.2m);
+            order.Scan("steak", 1.1m);
+            order.Scan("steak", 1.0m);
+
+            Assert.AreEqual(13m + 12m, order.PreTaxTotal);
+        }
+
+        [TestMethod]
         public void BuyOneSteakGetTheSmallerTwoForHalfOff()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = 1m, DiscountedQuantity = 2 });
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = .5m, DiscountedQuantity = 2, TriggerQuantity = 1 });
 
             order.Scan("steak", 1.3m);
             order.Scan("steak", 1.2m);
