@@ -10,7 +10,7 @@ namespace KataPos.Test
         public void MarkdownGeneratesNegativeValue()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new Markdown("pear", .25m));
+            order.Promotions.Add(new MarkdownSpecial("pear", .25m));
             order.Scan("pear");
             Assert.AreEqual(1m, order.PreTaxTotal);
         }
@@ -19,7 +19,7 @@ namespace KataPos.Test
         public void MarkdownGeneratesNegativeValueOnItemByWeight()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new Markdown("steak", 1m));
+            order.Promotions.Add(new MarkdownSpecial("steak", 1m));
             order.Scan("steak", 2m);
             Assert.AreEqual(18m, order.PreTaxTotal);
         }
@@ -28,8 +28,8 @@ namespace KataPos.Test
         public void MultipleMarkdownsAreOkay()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new Markdown("pear", .25m));
-            order.Promotions.Add(new Markdown("steak", 1m));
+            order.Promotions.Add(new MarkdownSpecial("pear", .25m));
+            order.Promotions.Add(new MarkdownSpecial("steak", 1m));
             order.Scan("steak", 2m);
             order.Scan("pear");
             Assert.AreEqual(19m, order.PreTaxTotal);
@@ -39,7 +39,7 @@ namespace KataPos.Test
         public void UnscanDoesntAllowResidualMarkdowns()
         {
             var order = new Order{Catalog = TestCatalog.Catalog};
-            order.Promotions.Add(new Markdown("pear", .25m));
+            order.Promotions.Add(new MarkdownSpecial("pear", .25m));
             order.Scan("pear");
             order.UnScan("pear");
             Assert.AreEqual(0m, order.PreTaxTotal);

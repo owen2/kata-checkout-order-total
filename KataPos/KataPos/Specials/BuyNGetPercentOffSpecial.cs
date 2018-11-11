@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KataPos
 {
-    public class BuyNGetPercentOff : ISpecial
+    public class BuyNGetPercentOffSpecial : ISpecial
     {
 
         public string Barcode { get; set; }

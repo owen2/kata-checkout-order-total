@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace KataPos
 {
-    public class Markdown : ISpecial
+    public class MarkdownSpecial : ISpecial
     {
         public string Barcode { get; set; }
         public decimal Amount { get; set; }
 
-        public Markdown(string barcode, decimal amount)
+        public MarkdownSpecial(string barcode, decimal amount)
         {
             Barcode = barcode;
             Amount = amount;
@@ -19,7 +19,7 @@ namespace KataPos
         {
             var discount = 0m;
             discount += -Amount * items.OfType<IndividualItem>().Count(item => item.Barcode == Barcode);
-            discount += -Amount * items.OfType<ItemByWeight>().Where(item => item.Barcode == Barcode).Sum(item => item.Weight);
+            discount += -Amount * items.OfType<ItemWithWeight>().Where(item => item.Barcode == Barcode).Sum(item => item.Weight);
             return discount;
         }
     }

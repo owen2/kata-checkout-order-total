@@ -11,7 +11,7 @@ namespace KataPos.Test
         public void BuyOneDogfoodGetOneDogfoodFree()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -23,7 +23,7 @@ namespace KataPos.Test
         public void BuyOneDogfoodDoesntGiveAwayFreeDogfood()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
 
             order.Scan("dog-food");
 
@@ -34,7 +34,7 @@ namespace KataPos.Test
         public void BuyTwoDogFoodsGetOneDogFoodHalfOff()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 2, PercentOff = .5m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 2, PercentOff = .5m });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -47,7 +47,7 @@ namespace KataPos.Test
         public void BuyTwoDogFoodsGetOneDogFoodHalfOffOneExtra()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 2, PercentOff = .5m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 2, PercentOff = .5m });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -61,7 +61,7 @@ namespace KataPos.Test
         public void BuyThreeDogFoodsGetOneDogFoodHalfOffDoesntApply()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 3, PercentOff = .5m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 3, PercentOff = .5m });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -74,7 +74,7 @@ namespace KataPos.Test
         public void BuyOneDogFoodGetOneDogFoodFreeLimitTwo()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m, Limit = 2 });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m, Limit = 2 });
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -88,7 +88,7 @@ namespace KataPos.Test
         public void BuyOneDogFoodGetOneDogFoodFreeNoLimit()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m});
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m});
 
             order.Scan("dog-food");
             order.Scan("dog-food");
@@ -102,7 +102,7 @@ namespace KataPos.Test
         public void UnscanDoesntGiveAwayFreeDogfood()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new BuyNGetPercentOff { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
+            order.Promotions.Add(new BuyNGetPercentOffSpecial { Barcode = "dog-food", TriggerQuantity = 1, PercentOff = 1m });
 
             order.Scan("dog-food");
             order.Scan("dog-food");

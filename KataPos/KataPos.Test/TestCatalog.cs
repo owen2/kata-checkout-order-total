@@ -11,7 +11,5 @@ namespace KataPos.Test
             ["pear"] = new CatalogEntry { Barcode = "pear", Price = 1.25m },
             ["steak"] = new CatalogEntry { Barcode = "steak", Price = 10m },
         };
-
-        public static IEnumerable<ISpecial> Promotions { get; } = new ISpecial[] { };
     }
 }

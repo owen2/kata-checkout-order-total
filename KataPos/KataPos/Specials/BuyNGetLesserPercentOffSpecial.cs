@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KataPos
 {
-    public class BuyNGetLesserPercentOff : ISpecial
+    public class BuyNGetLesserPercentOffSpecial : ISpecial
     {
         public string Barcode { get; set; }
         public decimal TriggerWeight { get; set; }
@@ -12,7 +12,7 @@ namespace KataPos
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            var applicableItems = items.OfType<ItemByWeight>().Where(item => item.Barcode == Barcode).OrderBy(item => item.Value).ToList();
+            var applicableItems = items.OfType<ItemWithWeight>().Where(item => item.Barcode == Barcode).OrderBy(item => item.Value).ToList();
 
             var aboveTriggerCount = applicableItems.Count(item => item.Weight >= TriggerWeight);
             var totalCount = applicableItems.Count();

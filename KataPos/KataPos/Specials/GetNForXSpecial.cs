@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace KataPos
 {
-    public class GetNForX : ISpecial
+    public class GetNForXSpecial : ISpecial
     {
         public string Barcode { get; set; }
         public int TriggerQuantity { get; set; }

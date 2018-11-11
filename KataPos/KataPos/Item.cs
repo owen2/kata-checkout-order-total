@@ -18,9 +18,9 @@
         public decimal EachesPrice { get; set; }
     }
 
-    public class ItemByWeight : Item
+    public class ItemWithWeight : Item
     {
-        public ItemByWeight(CatalogEntry catalogEntry, decimal weight)
+        public ItemWithWeight(CatalogEntry catalogEntry, decimal weight)
         {
             PerUnitPrice = catalogEntry.Price;
             Barcode = catalogEntry.Barcode;
