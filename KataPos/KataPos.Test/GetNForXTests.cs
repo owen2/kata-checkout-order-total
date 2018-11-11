@@ -10,7 +10,7 @@ namespace KataPos.Test
         public void FiveForFiveDoesntApply()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new GetNForX("pear", 5, 5m));
+            order.Promotions.Add(new GetNForX { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
             order.Scan("pear");
@@ -23,7 +23,7 @@ namespace KataPos.Test
         public void FiveForFive()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new GetNForX("pear", 5, 5m));
+            order.Promotions.Add(new GetNForX { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
             order.Scan("pear");
@@ -38,7 +38,7 @@ namespace KataPos.Test
         public void FiveForFiveTooMany()
         {
             var order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new GetNForX("pear", 5, 5m));
+            order.Promotions.Add(new GetNForX { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
             order.Scan("pear");

@@ -6,16 +6,9 @@ namespace KataPos
 {
     public class GetNForX : ISpecial
     {
-        private string Barcode;
-        private int TriggerQuantity;
-        private decimal BundlePrice;
-
-        public GetNForX(string barcode, int triggerQuantity, decimal bundlePrice)
-        {
-            Barcode = barcode;
-            TriggerQuantity = triggerQuantity;
-            BundlePrice = bundlePrice;
-        }
+        public string Barcode { get; set; }
+        public int TriggerQuantity { get; set; }
+        public decimal BundlePrice { get; set; }
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
