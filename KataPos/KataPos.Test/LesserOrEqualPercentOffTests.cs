@@ -55,5 +55,18 @@ namespace KataPos.Test
             Assert.AreEqual(13m + 12m, order.PreTaxTotal);
         }
 
+         [TestMethod]
+        public void BuyOneSteakGetTheSmallerTwoForHalfOff()
+        {
+            var order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new BuyNGetLesserPercentOffSpecial { Barcode = "steak", TriggerWeight = 1m, PercentOff = 1m, DiscountedQuantity = 2 });
+
+            order.Scan("steak", 1.3m);
+            order.Scan("steak", 1.2m);
+            order.Scan("steak", 1.1m);
+
+            Assert.AreEqual(13m + 6m + 5.5m, order.PreTaxTotal);
+        }
+
     }
 }

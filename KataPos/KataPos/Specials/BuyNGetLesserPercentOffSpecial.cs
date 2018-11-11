@@ -9,6 +9,7 @@ namespace KataPos
         public string Barcode { get; set; }
         public decimal TriggerWeight { get; set; }
         public decimal PercentOff { get; set; }
+        public int DiscountedQuantity { get; set; } = 1;
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
@@ -17,7 +18,7 @@ namespace KataPos
             var aboveTriggerCount = applicableItems.Count(item => item.Weight >= TriggerWeight);
             var totalCount = applicableItems.Count();
 
-            return -applicableItems.Take(Math.Min(totalCount / 2, aboveTriggerCount)).Sum(item => item.Value);
+            return -applicableItems.Take(Math.Min(totalCount / 2, aboveTriggerCount * DiscountedQuantity)).Sum(item => item.Value);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace KataPos
 
         public int? Limit { get; set; }
 
+        public int DiscountQuantity { get; set; } = 1;
+
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
             var applicableItems = items.OfType<IndividualItem>().Where(item => item.Barcode == Barcode);
@@ -27,7 +29,7 @@ namespace KataPos
             if (Limit.HasValue)
                 count = Math.Min(count, Limit.Value);
 
-            var discountedItems = count / (TriggerQuantity + 1);
+            var discountedItems = (count / (TriggerQuantity + DiscountQuantity)*DiscountQuantity);
             return -discountedItems * price * PercentOff;
         }
     }
