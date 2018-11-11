@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace KataPos.Test
 {
     [TestClass]
-    public class TransactionTests
+    public class OrderTests
     {
         [TestMethod]
         public void EmptyTransactionHasNoValue()
