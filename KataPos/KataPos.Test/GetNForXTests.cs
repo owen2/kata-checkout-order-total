@@ -9,7 +9,7 @@ namespace KataPos.Test
         [TestMethod]
         public void FiveForFiveDoesntApply()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
@@ -22,7 +22,7 @@ namespace KataPos.Test
         [TestMethod]
         public void FiveForFive()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
@@ -37,7 +37,7 @@ namespace KataPos.Test
         [TestMethod]
         public void FiveForFiveTooMany()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m });
 
             order.Scan("pear");
@@ -48,6 +48,20 @@ namespace KataPos.Test
             order.Scan("pear");
 
             Assert.AreEqual(5m + 1.25m, order.PreTaxTotal);
+        }
+
+        [TestMethod]
+        public void FiveForFiveLimitTwenty()
+        {
+            Order order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m, Limit = 5 });
+
+            for (int i = 0; i < 25; i++)
+            {
+                order.Scan("pear");
+            }
+
+            Assert.AreEqual((5m * 4m) + (5m * 1.25m), order.PreTaxTotal);
         }
     }
 }

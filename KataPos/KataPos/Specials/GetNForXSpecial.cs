@@ -9,6 +9,7 @@ namespace KataPos
         public string Barcode { get; set; }
         public int TriggerQuantity { get; set; }
         public decimal BundlePrice { get; set; }
+        public int Limit { get; set; }
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
