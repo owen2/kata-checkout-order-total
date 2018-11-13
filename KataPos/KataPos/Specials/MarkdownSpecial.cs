@@ -10,7 +10,7 @@ namespace KataPos
         public decimal Amount { get; set; }
         public int? Limit { get; private set; }
 
-        public MarkdownSpecial(string barcode, decimal amount, int? limit=null)
+        public MarkdownSpecial(string barcode, decimal amount, int? limit = null)
         {
             Barcode = barcode;
             Amount = amount;
@@ -19,9 +19,17 @@ namespace KataPos
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            var discount = 0m;
-            discount += -Amount * items.OfType<IndividualItem>().Count(item => item.Barcode == Barcode);
-            discount += -Amount * items.OfType<ItemWithWeight>().Where(item => item.Barcode == Barcode).Sum(item => item.Weight);
+            decimal discount = 0m;
+            List<Item> applicableItems = items
+                .Where(item => item.Barcode == Barcode)
+                .OrderBy(item => item.Value).ToList();
+
+            int discountedItemCount = Math.Min(Limit ?? applicableItems.Count, applicableItems.Count);
+            discount += -Amount * applicableItems
+                .Where(item => item.Barcode == Barcode)
+                .Take(discountedItemCount)
+                .Sum(item => item is ItemWithWeight ? (item as ItemWithWeight).Weight : 1);
+
             return discount;
         }
     }
