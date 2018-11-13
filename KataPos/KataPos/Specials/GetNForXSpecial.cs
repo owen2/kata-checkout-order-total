@@ -9,21 +9,21 @@ namespace KataPos
         public string Barcode { get; set; }
         public int TriggerQuantity { get; set; }
         public decimal BundlePrice { get; set; }
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            var applicableItems = items.OfType<IndividualItem>().Where(item => item.Barcode == Barcode);
+            IEnumerable<IndividualItem> applicableItems = items.OfType<IndividualItem>().Where(item => item.Barcode == Barcode);
 
             if (!applicableItems.Any()) return 0;
 
-            var eachesPrice = applicableItems.First().EachesPrice;
+            decimal eachesPrice = applicableItems.First().EachesPrice;
 
-            var count = applicableItems.Count();
+            int count = applicableItems.Count();
 
-            var bundles = count / TriggerQuantity;
+            int bundles = Math.Min(count, Limit ?? count) / TriggerQuantity;
 
-            return (-eachesPrice * bundles * TriggerQuantity) + (bundles * BundlePrice); 
+            return (-eachesPrice * bundles * TriggerQuantity) + (bundles * BundlePrice);
         }
     }
 }

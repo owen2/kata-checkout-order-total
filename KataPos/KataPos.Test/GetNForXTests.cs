@@ -54,7 +54,7 @@ namespace KataPos.Test
         public void FiveForFiveLimitTwenty()
         {
             Order order = new Order { Catalog = TestCatalog.Catalog };
-            order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m, Limit = 5 });
+            order.Promotions.Add(new GetNForXSpecial { Barcode = "pear", TriggerQuantity = 5, BundlePrice = 5m, Limit = 20 });
 
             for (int i = 0; i < 25; i++)
             {
