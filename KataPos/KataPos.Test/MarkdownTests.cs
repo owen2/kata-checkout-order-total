@@ -9,7 +9,7 @@ namespace KataPos.Test
         [TestMethod]
         public void MarkdownGeneratesNegativeValue()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new MarkdownSpecial("pear", .25m));
             order.Scan("pear");
             Assert.AreEqual(1m, order.PreTaxTotal);
@@ -18,7 +18,7 @@ namespace KataPos.Test
         [TestMethod]
         public void MarkdownGeneratesNegativeValueOnItemByWeight()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new MarkdownSpecial("steak", 1m));
             order.Scan("steak", 2m);
             Assert.AreEqual(18m, order.PreTaxTotal);
@@ -27,7 +27,7 @@ namespace KataPos.Test
         [TestMethod]
         public void MultipleMarkdownsAreOkay()
         {
-            var order = new Order { Catalog = TestCatalog.Catalog };
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new MarkdownSpecial("pear", .25m));
             order.Promotions.Add(new MarkdownSpecial("steak", 1m));
             order.Scan("steak", 2m);
@@ -38,11 +38,27 @@ namespace KataPos.Test
         [TestMethod]
         public void UnscanDoesntAllowResidualMarkdowns()
         {
-            var order = new Order{Catalog = TestCatalog.Catalog};
+            Order order = new Order { Catalog = TestCatalog.Catalog };
             order.Promotions.Add(new MarkdownSpecial("pear", .25m));
             order.Scan("pear");
             order.UnScan("pear");
             Assert.AreEqual(0m, order.PreTaxTotal);
+        }
+
+        [TestMethod]
+        public void MarkdownLimitFive()
+        {
+            Order order = new Order { Catalog = TestCatalog.Catalog };
+            order.Promotions.Add(new MarkdownSpecial("pear", .25m, 5));
+
+            order.Scan("pear");
+            order.Scan("pear");
+            order.Scan("pear");
+            order.Scan("pear");
+            order.Scan("pear");
+            order.Scan("pear");
+
+            Assert.AreEqual((1m * 5m) + 1.25m, order.PreTaxTotal);
         }
     }
 }

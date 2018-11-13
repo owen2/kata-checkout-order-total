@@ -8,11 +8,13 @@ namespace KataPos
     {
         public string Barcode { get; set; }
         public decimal Amount { get; set; }
+        public int? Limit { get; private set; }
 
-        public MarkdownSpecial(string barcode, decimal amount)
+        public MarkdownSpecial(string barcode, decimal amount, int? limit=null)
         {
             Barcode = barcode;
             Amount = amount;
+            Limit = limit;
         }
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
