@@ -80,7 +80,7 @@ namespace KataPos.Test
             order.Scan("steak", 1.1m);
             order.Scan("steak", 1.0m);
 
-            Assert.AreEqual(13m + 12m, order.PreTaxTotal);
+            Assert.AreEqual(13m + 12m + 11m, order.PreTaxTotal);
         }
 
         [TestMethod]
