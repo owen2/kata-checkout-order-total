@@ -11,15 +11,16 @@ namespace KataPos
         public decimal TriggerWeight { get; set; }
         public decimal PercentOff { get; set; }
         public int DiscountedQuantity { get; set; } = 1;
+        public int? Limit { get; set; }
 
         public decimal CalculateDiscount(IEnumerable<Item> items)
         {
-            var applicableItems = items.OfType<ItemWithWeight>().Where(item => item.Barcode == Barcode).OrderBy(item => item.Value).ToList();
+            List<ItemWithWeight> applicableItems = items.OfType<ItemWithWeight>().Where(item => item.Barcode == Barcode).OrderBy(item => item.Value).ToList();
 
-            var aboveTriggerCount = applicableItems.Count(item => item.Weight >= TriggerWeight);
-            var groupCount = applicableItems.Count / (DiscountedQuantity + TriggerQuantity);
+            int aboveTriggerCount = applicableItems.Count(item => item.Weight >= TriggerWeight);
+            int groupCount = Math.Min(applicableItems.Count, Limit ?? applicableItems.Count) / (DiscountedQuantity + TriggerQuantity);
 
-            return -applicableItems.Take(Math.Min(groupCount,aboveTriggerCount)*DiscountedQuantity).Sum(item => item.Value) * PercentOff;
+            return -applicableItems.Take(Math.Min(groupCount, aboveTriggerCount) * DiscountedQuantity).Sum(item => item.Value) * PercentOff;
         }
     }
 }
